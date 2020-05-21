@@ -1,0 +1,12 @@
+자동완성 : 느낌표+tap
+alt+shift+b : web page 띄우기
+
+
+숙제 (html + ccs)
+부트 스트랩활용할것 
+카드 - 인풋 그룹 을 활용하여 만들것
+
+style ="font-size:18px;">
+
+
+https://www.notion.so/8-2-dd19a12e70a24b67aa15688f6cf87371
