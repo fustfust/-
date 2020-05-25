@@ -141,19 +141,24 @@
         </div>
     </div>
     <script>
+
+
         $('#post-box').hide();
-        function openclose(){
-           // $('#post-box').hide();
-           let display = $("#post-box").css('display')
-            if(display == "block"){
+        function openclose() {
+            // $('#post-box').hide();
+            let display = $("#post-box").css('display')
+            if (display == "block") {
                 $('#post-box').hide();
                 $('#btn-posting-box').text('포스팅 박스 열기');
-            } else if(display == "none"){
+            } else if (display == "none") {
                 $('#post-box').show();
                 $('#btn-posting-box').text('포스팅 박스 닫기');
             }
-           console.log(display);
+            console.log(display);
+
         }
+
+
     </script>
 </body>
 

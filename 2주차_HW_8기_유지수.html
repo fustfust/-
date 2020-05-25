@@ -1,0 +1,151 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css2?family=Nanum+Pen+Script&display=swap" rel="stylesheet">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+
+    <style>
+        .mytitle {
+            color: white;
+            width: 300px;
+            height: 200px;
+            background-image: url('https://c1.staticflickr.com/1/468/31693853016_10d893329e_b.jpg');
+            background-position: center;
+            background-size: cover;
+
+            border-radius: 10px;
+            text-align: center;
+            padding-top: 40px;
+        }
+
+        .wrap {
+            width: 500px;
+            margin: auto;
+        }
+
+        .big_font {
+            font-size: 40px;
+        }
+
+        .title_font {
+            font-family: 'Nanum Pen Script', cursive;
+        }
+
+        .margin {
+            padding-left: 1px
+        }
+
+        /*이 속성은 글씨 폰트를 바꾸기 위해 링크를 받아오는 것입니다. */
+        body {
+            font-family: 'Nanum Pen Script', cursive;
+            font-size: 30px;
+        }
+    </style>
+    <script>
+        function q1() {
+            let q1_name = $('#input_name_order').val();
+            let q1_quantity = $('#inputGroupSelect01').val();
+            let q1_address = $('#order_address').val();
+            let q1_phone = $('#phone_number').val();
+            if (q1_name == "") {
+                alert("주문자 이름을 입력하세요");
+            } else if (q1_quantity == "") {
+                alert("주문수량을 선택하세요");
+            } else if (q1_address == "") {
+                alert("주소를 선택하세요");
+            } else if (q1_phone == "") {
+                alert("전화번호를 선택하세요");
+            }
+            let check_phone_type1 = (q1_phone.match(/-/g) || []).length
+            let check_phone_type2 = isCellPhone(q1_phone);
+            console.log(check_phone_type1);
+            console.log(check_phone_type2);
+            if (check_phone_type1 != 2 || check_phone_type2 == false) {
+                alert("전화번호 형식이 아닙니다. ex)010-1234-5678");
+            }
+
+
+
+        }
+        function isCellPhone(p) {
+            p = p.split('-').join('');
+            var regPhone = /^((01[1|6|7|8|9])[1-9]+[0-9]{6,7})|(010[1-9][0-9]{7})$/;
+            return regPhone.test(p);
+        }
+
+        $(document).ready(function () {
+            $.ajax({
+                type: "GET", // GET 방식으로 요청한다.
+                url: "https://api.manana.kr/exchange/rate.json",
+                data: {}, // 요청하면서 함께 줄 데이터 (GET 요청시엔 비워두세요)
+                success: function (response) {
+                    let exchange_money = response['NAME'];
+                    let exchange_rate = response['rate'];
+                    console.log(exchange_money, ':', exchange_rate);
+                }
+            })
+        })
+    </script>
+</head>
+
+<body>
+    <div class="wrap">
+        <div class="card" style="width: 36rem;">
+            <img class="card-img-top" src="https://c1.staticflickr.com/1/468/31693853016_10d893329e_b.jpg" alt="">
+            <div class="card-body">
+                <div class="title_font">
+                    <h3 class="card-title" style="font-size: 40px; display: inline-block;">노트북을 팝니다:</h3>
+                    <h3 class="card-title" style="font-size: 30px; display: inline-block;"> 1,100,000원</h3>
+                </div>
+                <div>
+                    <h5 class="card-text">가성비, A/S No.1 삼성 노트북입니다.DP용으로 사용된 상태 A급이며 수량 얼마 남지 않았습니다. 많은 관심 부탁드립니다.
+                    </h5>
+                </div>
+
+            </div>
+            <div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">주문자이름</span>
+                    </div>
+                    <input type="text" class="form-control" id=input_name_order aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <label class="input-group-text" for="inputGroupSelect01">수량</label>
+                    </div>
+                    <select class="custom-select title_font" id="inputGroupSelect01">
+                        <option selected></option>
+                        <option value="1">1</option>
+                        <option value="2">2</option>
+                        <option value="3">3</option>
+                    </select>
+                </div>
+
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">주소</span>
+                    </div>
+                    <input type="text" class="form-control" id="order_address" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="input-group mb-3">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text" id="inputGroup-sizing-default">전화번호</span>
+                    </div>
+                    <input type="text" class="form-control" id="phone_number" aria-label="Default"
+                        aria-describedby="inputGroup-sizing-default">
+                </div>
+                <div class="margin text-center"><button onclick="q1()" class="btn btn-primary">주문하기</button></div>
+
+            </div>
+</body>
+
+</html>
