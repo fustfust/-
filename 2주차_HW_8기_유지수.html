@@ -37,6 +37,10 @@
             font-family: 'Nanum Pen Script', cursive;
         }
 
+        .title_color {
+            color: blue;
+        }
+
         .margin {
             padding-left: 1px
         }
@@ -85,9 +89,12 @@
                 url: "https://api.manana.kr/exchange/rate.json",
                 data: {}, // 요청하면서 함께 줄 데이터 (GET 요청시엔 비워두세요)
                 success: function (response) {
-                    let exchange_money = response['NAME'];
-                    let exchange_rate = response['rate'];
+                    let exchange = response[1];
+                    let exchange_money = exchange['name'];
+                    exchange_rate = exchange['rate'];
                     console.log(exchange_money, ':', exchange_rate);
+                    let html = `<div>달러-원 환율 : ${exchange_rate}</div>`;
+                    $('#names-q1').append(html);
                 }
             })
         })
@@ -110,6 +117,12 @@
 
             </div>
             <div>
+
+                <div class="title_color" id="names-q1">
+
+                </div>
+
+
                 <div class="input-group mb-3">
                     <div class="input-group-prepend">
                         <span class="input-group-text" id="inputGroup-sizing-default">주문자이름</span>
