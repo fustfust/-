@@ -93,6 +93,7 @@
                     let exchange_money = exchange['name'];
                     exchange_rate = exchange['rate'];
                     console.log(exchange_money, ':', exchange_rate);
+                    //html div로 수정 (li는 dot를 포함)
                     let html = `<div>달러-원 환율 : ${exchange_rate}</div>`;
                     $('#names-q1').append(html);
                 }
